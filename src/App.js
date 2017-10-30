@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
+var NumberFormat = require('react-number-format');
 
 class App extends Component {
 
@@ -26,7 +27,7 @@ class App extends Component {
         {Object.keys(cryptos).map((key) => (
           <div id={"currency-container"} key={key}>
             <span className="currency">{key}</span>
-            <span className="price">{this.state.cryptos[key].USD}</span>
+            <span className="price"><NumberFormat value={this.state.cryptos[key].USD} displayType={'text'} decimalScale={2} fixedDecimalScale={true} thousandSeparator={true} prefix={'$'} /></span>
           </div>
         ))}
       </div>
