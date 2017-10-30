@@ -4,26 +4,31 @@ import MockAdapter from 'axios-mock-adapter';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { componentDidMount } from './App'
+
+var mock = new MockAdapter(axios);
+
+mock.onGet('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,IOT&tsyms=USD').reply(200, {
+  cryptos: [
+    { BTC:{
+      USD: '16142.04'
+    }}
+  ]
+});
+
+// axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,IOT&tsyms=USD')
+//   .then(function(response) {
+//     console.log(response.data);
+//   });
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(<App />, div);
 });
 
-
-
-it('returns data when get request called', (done) => {
-  let mock = new MockAdapter(axios);
-  mock.onGet('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,IOT&tsyms=USD').reply(200,{
-    data: {
-      posts: ['intro to git']
-    }
-  });
-
-  let response = componentDidMount();
-
-  expect(response.data[0]).to.be.equal(USD)
-
-
+it('returns data when get request called', () => {
+  return axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,IOT&tsyms=USD')
+  .then(data => {
+    expect(data).toBeDefined()
+    expect(data.data.cryptos[0].BTC).toEqual({ USD: '16142.04'})
+  })
 });
