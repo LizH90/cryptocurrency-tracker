@@ -1,20 +1,20 @@
 body {
-  background: #f1f1f1;
-  padding:50px;
+  background: #d7e3f7;
+  padding:60px;
 }
 
-div#crypto-container {
+div#currency-container {
   background:white;
-  width: 70%;
-  margin: 0 auto 4px auto;
+  width: 80%;
+  margin: 0 auto 6px auto;
   padding: 1em;
-  box-shadow: 1px 1px 0 lightgrey;
+  box-shadow: 2px 2px 0 lightgrey;
 }
 
-span.left {
+span.currency {
   font-weight: bold;
 }
 
-span.right {
+span.price {
   float:right;
 }

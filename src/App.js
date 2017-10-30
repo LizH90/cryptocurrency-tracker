@@ -24,9 +24,9 @@ class App extends Component {
     return (
       <div className="App">
         {Object.keys(cryptos).map((key) => (
-          <div id={"crypto-container"} key={key}>
-            <span className="left">{key}</span>
-            <span className="right">{this.state.cryptos[key].USD}</span>
+          <div id={"currency-container"} key={key}>
+            <span className="currency">{key}</span>
+            <span className="price">{this.state.cryptos[key].USD}</span>
           </div>
         ))}
       </div>
