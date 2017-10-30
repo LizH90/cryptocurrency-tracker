@@ -8,6 +8,8 @@
     "jest-cli": "^21.2.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-easy-chart": "^0.3.0",
+    "react-number-format": "^3.0.0-beta3",
     "react-scripts": "1.0.14"
   },
   "scripts": {
