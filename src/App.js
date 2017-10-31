@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import {Line} from 'react-chartjs-2';
 import axios from 'axios';
 import './App.css';
 import moment from 'moment';
-// import Chart from './components/Chart.js'
+import Chart from './components/Chart.js'
 var NumberFormat = require('react-number-format');
 
 
@@ -19,14 +20,14 @@ class App extends Component {
     }
   }
 
-  componentWillMount(){
-    this.getChartData();
-  }
+  // componentWillMount(){
+  //   this.getChartData();
+  // }
 
   static defaultProps = {
     displayTitle:true,
     displayLegend:false,
-    legendPosition:'bottom'
+    legendPosition:'bottom',
   }
 
   getChartData(){
@@ -61,7 +62,7 @@ class App extends Component {
     }).catch(function (error) {
       console.log(error);
     })
-      this.getChartData();
+    this.getChartData();
   }
 
   render() {
@@ -74,26 +75,8 @@ class App extends Component {
           </div>
         ))}
         <div className={"chart"}>
-        <Line
-          data={this.state.chartData}
-          options={{
-            title:{
-              display:this.props.displayTitle,
-              text: 'Bitcoin/USD Converter',
-              fontSize: 20
-            },
-            legend:{
-              display:this.props.displayLegend,
-              position:this.props.legendPosition,
-              labels:{
-                fontColor:'#000'
-              }
-            }
-          }}
-        />
+        <Chart data="value" data={console.log(this.state.chartData)}/>
         </div>
-
-
       </div>
     )
   }
