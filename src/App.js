@@ -29,7 +29,7 @@ class App extends Component {
         let date=[]
         let value=[]
         for (let i=0; i<bitcoin.length; i++){
-          date.push(bitcoin[i].time)
+          date.push(bitcoin[i].time.toISOString())
           value.push(bitcoin[i].open)
         }
         console.log(date)

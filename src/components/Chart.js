@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-// import ReactDOM from 'react-dom';
-// import './Chart.css';
+import './Chart.css';
 import {Line} from 'react-chartjs-2';
 
 
@@ -23,8 +22,6 @@ class Chart extends Component{
       <div className="chart">
       <Line
         data={this.state.chartData}
-        // width={100}
-        // height={50}
         options={{
           title:{
             display:this.props.displayTitle,
