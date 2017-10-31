@@ -19,9 +19,15 @@ class App extends Component {
     }
   }
 
-  // componentDidMount(){
-  //   this.getChartData();
-  // }
+  componentWillMount(){
+    this.getChartData();
+  }
+
+  static defaultProps = {
+    displayTitle:true,
+    displayLegend:false,
+    legendPosition:'bottom'
+  }
 
   getChartData(){
     axios.get('https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=60&aggregate=3&e=CCCAGG')
@@ -33,8 +39,6 @@ class App extends Component {
           date.push(moment.unix(bitcoin[i].time).format("DD-MMM"))
           value.push(bitcoin[i].open)
         }
-        console.log(date)
-        console.log(value)
           this.setState({
             chartData: {
               labels: date,
@@ -44,12 +48,10 @@ class App extends Component {
               ]
             }
           });
-          console.log(this.state)
         }
     ).catch(function (error) {
       console.log(error);
     })
-    console.log(this.state)
   }
 
   componentDidMount() {
@@ -71,13 +73,13 @@ class App extends Component {
             <span className="price"><NumberFormat value={this.state.cryptos[key].USD} displayType={'text'} decimalScale={2} fixedDecimalScale={true} thousandSeparator={true} prefix={'$'} /></span>
           </div>
         ))}
-        <div className="chart">
+        <div className={"chart"}>
         <Line
           data={this.state.chartData}
           options={{
             title:{
               display:this.props.displayTitle,
-              text: 'Bitcoin to USD',
+              text: 'Bitcoin/USD Converter',
               fontSize: 20
             },
             legend:{
