@@ -55,7 +55,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,IOT&tsyms=USD')
+    axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD')
       .then(res => {
       this.setState({cryptos: res.data});
     }).catch(function (error) {

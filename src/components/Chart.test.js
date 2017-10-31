@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 var mock1 = new MockAdapter(axios);
 
 mock1.onGet('https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=60&aggregate=3&e=CCCAGG').reply(200, {
-  labels: ['Something', 'ETH', 'Something'],
+  labels: ['29-Oct', '30-Oct', '31-Oct'],
     datasets:[
       {title: 'Price in £',
         data: [
@@ -24,6 +24,6 @@ it('returns data when get request called', () => {
   return axios.get('https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=60&aggregate=3&e=CCCAGG')
   .then(data => {
     expect(data).toBeDefined()
-    // expect(data.data.labels[0]).toEqual({ USD: '16142.04'})
+    expect(data.data.labels[0]).toEqual('29-Oct')
   })
 });

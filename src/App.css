@@ -4,11 +4,12 @@ body {
 }
 
 div#currency-container {
-  background:white;
+  background:#d7e3f7;
   width: 80%;
   margin: 0 auto 6px auto;
   padding: 1em;
   box-shadow: 2px 2px 0 lightgrey;
+  border: 1px solid blue;
 }
 
 span.currency {
