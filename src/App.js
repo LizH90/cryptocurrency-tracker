@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Line} from 'react-chartjs-2';
 import axios from 'axios';
 import './App.css';
+import moment from 'moment';
 // import Chart from './components/Chart.js'
 var NumberFormat = require('react-number-format');
 
@@ -18,18 +19,18 @@ class App extends Component {
     }
   }
 
-  componentWillMount(){
-    this.getChartData();
-  }
+  // componentDidMount(){
+  //   this.getChartData();
+  // }
 
   getChartData(){
     axios.get('https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=60&aggregate=3&e=CCCAGG')
       .then(res => {
-        var bitcoin = res.data.Data
+        let bitcoin = res.data.Data
         let date=[]
         let value=[]
         for (let i=0; i<bitcoin.length; i++){
-          date.push(bitcoin[i].time)
+          date.push(moment.unix(bitcoin[i].time).format("DD-MMM"))
           value.push(bitcoin[i].open)
         }
         console.log(date)
@@ -58,6 +59,7 @@ class App extends Component {
     }).catch(function (error) {
       console.log(error);
     })
+      this.getChartData();
   }
 
   render() {
