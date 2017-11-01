@@ -17,6 +17,8 @@ div#currency-container {
 }
 
 div#chart {
+  margin: auto;
+  width: 80%;
 }
 
 span.currency {
