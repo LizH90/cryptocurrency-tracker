@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-// import {Line} from 'react-chartjs-2';
+import {Line} from 'react-chartjs-2';
 import axios from 'axios';
 import './App.css';
 import moment from 'moment';
-import Chart from './components/Chart.js'
-import './components/Chart.css';
 var NumberFormat = require('react-number-format');
 
 class App extends Component {
@@ -12,21 +10,15 @@ class App extends Component {
     super(props);
     this.state = {
       cryptos:[],
-      chartData: {
-        labels: []
-      }
+      chartData: {}
     }
   }
 
-  // static defaultProps = {
-  //   displayTitle:true,
-  //   displayLegend:false,
-  //   legendPosition:'bottom',
-  // }
-
-  // componentWillMount(){
-  // }
-
+  static defaultProps = {
+    displayTitle:true,
+    displayLegend:false,
+    legendPosition:'bottom',
+  }
 
   getChartData(){
     axios.get('https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=60&aggregate=3&e=CCCAGG')
@@ -38,12 +30,13 @@ class App extends Component {
           date.push(moment.unix(bitcoin[i].time).format("DD-MMM"))
           value.push(bitcoin[i].open)
         }
-        console.log(value)
           this.setState({
             chartData: {
               labels: date,
               datasets:[
-                { data: value
+                { label: 'Price in $',
+                  data: value,
+                  backgroundColor:['#657b9e']
                 }
               ]
             }
@@ -54,11 +47,11 @@ class App extends Component {
     })
   }
 
+
   getInfoBoxData() {
     axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD')
       .then(res => {
         this.setState({cryptos: res.data})
-        console.log("THIS")
     }).catch(function (error) {
       console.log(error);
     })
@@ -66,14 +59,14 @@ class App extends Component {
 
   componentDidMount(){
     this.getInfoBoxData();
+    setInterval(() => {this.getInfoBoxData()}, 10000);
     this.getChartData();
-    setInterval(() => {this.getInfoBoxData()}, 3000);
   }
 
   render() {
     return (
       <div className="Title">
-      <h1> Bitcoin Price Tracker </h1>
+      <h1> Bitcoin Price Tracker USD </h1>
       <br></br>
       <div className="App">
         {Object.keys(this.state.cryptos).map((key) => (
@@ -82,8 +75,25 @@ class App extends Component {
             <span className="price"><NumberFormat value={this.state.cryptos[key].USD} displayType={'text'} decimalScale={2} fixedDecimalScale={true} thousandSeparator={true} prefix={'$'} /></span>
           </div>
         ))}
-        <div className="chart" >
-        <Chart data={this.state.chartData}/>
+        <div className="chart" id="chart" >
+        <Line
+          data={this.state.chartData}
+          options={{
+            title:{
+              display:this.props.displayTitle,
+              text: '',
+              fontSize: 20,
+              fontColor:'#000'
+            },
+            legend:{
+              display:this.props.displayLegend,
+              position:this.props.legendPosition,
+              labels:{
+                fontColor:'#000'
+              }
+            }
+          }}
+        />
         </div>
       </div>
       </div>

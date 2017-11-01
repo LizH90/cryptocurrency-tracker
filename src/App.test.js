@@ -15,11 +15,6 @@ mock.onGet('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,IOT&
   ]
 });
 
-// axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,IOT&tsyms=USD')
-//   .then(function(response) {
-//     console.log(response.data);
-//   });
-
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(<App />, div);

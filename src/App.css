@@ -16,6 +16,9 @@ div#currency-container {
   border: 1px solid #5a5c5e;
 }
 
+div#chart {
+}
+
 span.currency {
   font-weight: bold;
 }

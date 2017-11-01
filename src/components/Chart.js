@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import './Chart.css';
 import {Line} from 'react-chartjs-2';
+import axios from 'axios';
+import moment from 'moment';
 
 
 class Chart extends Component{
