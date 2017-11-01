@@ -23,9 +23,9 @@ class App extends Component {
   //   displayLegend:false,
   //   legendPosition:'bottom',
   // }
-  componentWillMount(){
-    this.getChartData();
-  }
+
+  // componentWillMount(){
+  // }
 
 
   getChartData(){
@@ -54,16 +54,21 @@ class App extends Component {
     })
   }
 
-  componentDidMount() {
-    setInterval(() => {
+  getInfoBoxData() {
     axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD')
       .then(res => {
         this.setState({cryptos: res.data})
         console.log("THIS")
     }).catch(function (error) {
       console.log(error);
-    })}, 3000);
-}
+    })
+  }
+
+  componentDidMount(){
+    this.getInfoBoxData();
+    this.getChartData();
+    setInterval(() => {this.getInfoBoxData()}, 3000);
+  }
 
   render() {
     return (
@@ -77,8 +82,8 @@ class App extends Component {
             <span className="price"><NumberFormat value={this.state.cryptos[key].USD} displayType={'text'} decimalScale={2} fixedDecimalScale={true} thousandSeparator={true} prefix={'$'} /></span>
           </div>
         ))}
-        <div className="chart" data={this.state.chartData}>
-        <Chart/>
+        <div className="chart" >
+        <Chart data={this.state.chartData}/>
         </div>
       </div>
       </div>

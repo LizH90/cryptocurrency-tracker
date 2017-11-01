@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import './Chart.css';
 import {Line} from 'react-chartjs-2';
 
