@@ -22,7 +22,7 @@ class Chart extends Component{
     return (
       <div className="chart">
       <Line
-        data={console.log(this.state.chartData)}
+        data={this.state.chartData}
         options={{
           title:{
             display:this.props.displayTitle,

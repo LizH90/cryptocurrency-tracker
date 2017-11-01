@@ -55,11 +55,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    let self = this;
     setInterval(() => {
     axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD')
       .then(res => {
-        self.setState({cryptos: res.data})
+        this.setState({cryptos: res.data})
         console.log("THIS")
     }).catch(function (error) {
       console.log(error);
