@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import {Line} from 'react-chartjs-2';
+// import {Line} from 'react-chartjs-2';
 import axios from 'axios';
 import './App.css';
 import moment from 'moment';
 import Chart from './components/Chart.js'
+import './components/Chart.css';
 var NumberFormat = require('react-number-format');
 
-
 class App extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -20,15 +18,15 @@ class App extends Component {
     }
   }
 
-  // componentWillMount(){
-  //   this.getChartData();
+  // static defaultProps = {
+  //   displayTitle:true,
+  //   displayLegend:false,
+  //   legendPosition:'bottom',
   // }
-
-  static defaultProps = {
-    displayTitle:true,
-    displayLegend:false,
-    legendPosition:'bottom',
+  componentWillMount(){
+    this.getChartData();
   }
+
 
   getChartData(){
     axios.get('https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=60&aggregate=3&e=CCCAGG')
@@ -40,6 +38,7 @@ class App extends Component {
           date.push(moment.unix(bitcoin[i].time).format("DD-MMM"))
           value.push(bitcoin[i].open)
         }
+        console.log(value)
           this.setState({
             chartData: {
               labels: date,
@@ -56,17 +55,22 @@ class App extends Component {
   }
 
   componentDidMount() {
+    let self = this;
+    setInterval(() => {
     axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD')
       .then(res => {
-      this.setState({cryptos: res.data});
+        self.setState({cryptos: res.data})
+        console.log("THIS")
     }).catch(function (error) {
       console.log(error);
-    })
-    this.getChartData();
-  }
+    })}, 3000);
+}
 
   render() {
     return (
+      <div className="Title">
+      <h1> Bitcoin Price Tracker </h1>
+      <br></br>
       <div className="App">
         {Object.keys(this.state.cryptos).map((key) => (
           <div id={"currency-container"} key={key}>
@@ -74,9 +78,10 @@ class App extends Component {
             <span className="price"><NumberFormat value={this.state.cryptos[key].USD} displayType={'text'} decimalScale={2} fixedDecimalScale={true} thousandSeparator={true} prefix={'$'} /></span>
           </div>
         ))}
-        <div className={"chart"}>
-        <Chart data="value" data={console.log(this.state.chartData)}/>
+        <div className="chart" data={this.state.chartData}>
+        <Chart/>
         </div>
+      </div>
       </div>
     )
   }
