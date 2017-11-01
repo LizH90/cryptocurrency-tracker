@@ -70,7 +70,7 @@ class App extends Component {
       <br></br>
       <div className="App">
         {Object.keys(this.state.cryptos).map((key) => (
-          <div id={"currency-container"} key={key}>
+          <div id="currency-container" key={key}>
             <span className="currency">{key}</span>
             <span className="price"><NumberFormat value={this.state.cryptos[key].USD} displayType={'text'} decimalScale={2} fixedDecimalScale={true} thousandSeparator={true} prefix={'$'} /></span>
           </div>
