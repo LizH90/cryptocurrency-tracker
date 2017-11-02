@@ -97,7 +97,7 @@ class App extends Component {
   render() {
     return (
       <div className="Title">
-      <h1> Bitcoin Price Tracker USD </h1>
+      <h1> CryptoCurrency Price Tracker</h1>
       <br></br>
       <div className="App">
         {Object.keys(this.state.cryptos).map((key) => (
