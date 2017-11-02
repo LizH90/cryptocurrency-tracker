@@ -9,8 +9,12 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      urls: ['https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH&tsyms=USD',
+      'https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=60&aggregate=3&e=CCCAGG',
+      'https://min-api.cryptocompare.com/data/histoday?fsym=ETH&tsym=USD&limit=60&aggregate=3&e=CCCAGG'],
       cryptos:[],
-      chartData: {}
+      chartData: {},
+      chart2Data: {}
     }
   }
 
@@ -20,8 +24,8 @@ class App extends Component {
     legendPosition:'bottom',
   }
 
-  getChartData(){
-    axios.get('https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=60&aggregate=3&e=CCCAGG')
+  getChartData(url){
+    axios.get(url)
       .then(res => {
         let bitcoin = res.data.Data
         let date=[]
@@ -46,11 +50,37 @@ class App extends Component {
       console.log(error);
     })
   }
-
-
-  getInfoBoxData() {
-    axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD')
+  getChart2Data(url){
+    axios.get(url)
       .then(res => {
+        let bitcoin = res.data.Data
+        let date=[]
+        let value=[]
+        for (let i=0; i<bitcoin.length; i++){
+          date.push(moment.unix(bitcoin[i].time).format("DD-MMM"))
+          value.push(bitcoin[i].open)
+        }
+          this.setState({
+            chart2Data: {
+              labels: date,
+              datasets:[
+                { label: 'Price in $',
+                  data: value,
+                  backgroundColor:['#657b9e']
+                }
+              ]
+            }
+          });
+        }
+    ).catch(function (error) {
+      console.log(error);
+    })
+  }
+
+  getInfoBoxData(url) {
+    axios.get(url)
+      .then(res => {
+        console.log("api call")
         this.setState({cryptos: res.data})
     }).catch(function (error) {
       console.log(error);
@@ -58,9 +88,10 @@ class App extends Component {
   }
 
   componentDidMount(){
-    this.getInfoBoxData();
-    setInterval(() => {this.getInfoBoxData()}, 10000);
-    this.getChartData();
+    this.getInfoBoxData(this.state.urls[0]);
+    setInterval(() => {this.getInfoBoxData(this.state.urls[0])}, 10000);
+    this.getChartData(this.state.urls[1]);
+    this.getChart2Data(this.state.urls[2]);
   }
 
   render() {
@@ -78,6 +109,24 @@ class App extends Component {
         <div className="chart" id="chart" >
         <Line
           data={this.state.chartData}
+          options={{
+            title:{
+              display:this.props.displayTitle,
+              text: '',
+              fontSize: 20,
+              fontColor:'#000'
+            },
+            legend:{
+              display:this.props.displayLegend,
+              position:this.props.legendPosition,
+              labels:{
+                fontColor:'#000'
+              }
+            }
+          }}
+        />
+        <Line
+          data={this.state.chart2Data}
           options={{
             title:{
               display:this.props.displayTitle,

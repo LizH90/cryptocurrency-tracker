@@ -18,7 +18,8 @@ div#currency-container {
 
 div#chart {
   margin: auto;
-  width: 80%;
+  width: 50%;
+  height: 50%;
 }
 
 span.currency {
