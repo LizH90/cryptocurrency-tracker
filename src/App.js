@@ -112,7 +112,7 @@ class App extends Component {
           options={{
             title:{
               display:this.props.displayTitle,
-              text: '',
+              text: 'Bitcoin to USD',
               fontSize: 20,
               fontColor:'#000'
             },
@@ -130,7 +130,7 @@ class App extends Component {
           options={{
             title:{
               display:this.props.displayTitle,
-              text: '',
+              text: 'Ethereum to USD',
               fontSize: 20,
               fontColor:'#000'
             },
