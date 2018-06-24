@@ -1,5 +1,6 @@
 h1 {
   text-align: center;
+  color: #535860
 }
 
 body {
@@ -13,13 +14,13 @@ div#currency-container {
   margin: 0 auto 6px auto;
   padding: 1em;
   box-shadow: 2px 2px 0 lightgrey;
-  border: 1px solid #5a5c5e;
+  border: 1px solid #7d848e;
+  opacity: 0.6;
 }
 
 div#chart {
   margin: auto;
-  width: 50%;
-  height: 50%;
+  width: 60%;
 }
 
 span.currency {
