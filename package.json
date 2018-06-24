@@ -3,16 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.17.0",
-    "chart.js": "^2.7.1",
-    "core-js": "^2.5.1",
+    "axios": "^0.17.1",
+    "chart.js": "^2.7.2",
+    "core-js": "^2.5.7",
     "jest-cli": "^21.2.1",
-    "moment": "^2.19.1",
-    "react": "^16.0.0",
-    "react-chartjs-2": "^2.6.4",
-    "react-dom": "^16.0.0",
-    "react-moment": "^0.6.5",
-    "react-number-format": "^3.0.0-beta3",
+    "moment": "^2.22.2",
+    "react": "^16.4.1",
+    "react-chartjs-2": "^2.7.2",
+    "react-dom": "^16.4.1",
+    "react-moment": "^0.6.9",
+    "react-number-format": "^3.4.1",
     "react-scripts": "1.0.14"
   },
   "scripts": {
@@ -22,6 +22,6 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "axios-mock-adapter": "^1.9.0"
+    "axios-mock-adapter": "^1.15.0"
   }
 }
