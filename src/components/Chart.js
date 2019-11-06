@@ -22,6 +22,7 @@ class Chart extends Component{
   render(){
     return (
       <div className="chart">
+      this has been added by Becca
       <Line
         data={this.state.chartData}
         options={{
